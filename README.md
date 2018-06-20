@@ -1,0 +1,2 @@
+# Automated-Gardening-using-ATMEGA32
+It is about sensing the soil moisture of the soil using a sensor, and if the soil is dry, start the water pump to pump the water to the plant, and wait for the moisture level to go High, as soon as it goes beyond a specified limit, the motor is turned off. The Soil moisture sensor is self made, and in order to provide power to the motor driver there is a full bridge rectifier designed.
