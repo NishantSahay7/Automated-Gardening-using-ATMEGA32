@@ -14,16 +14,16 @@
 #include<util/delay.h>
 
 
-#include "adc.h"
-#include "lcd.h"
+#include "adc.h"	//Including ADC Library
+#include "lcd.h"	//Including LCD Library
 #include "pwm.h"
 
 int main()
 {
 
-	adc_init();	//initializing the adc
-	lcd_init();	//initializing the lcd
-	pwm_init();	//initializing the pwm
+	adc_init();	//initializing the ADC
+	lcd_init();	//initializing the LCD
+	pwm_init();	//initializing the PWM
 	
 	int a,b,c;
 	
@@ -32,21 +32,18 @@ int main()
 	
 	a=adc_read(0);		//Soil_Sensor is connected to PortA pin0
 	b=adc_read(1);		//LM35 is connected to POrtA pin1
-	b=b*0.488;			//converting value from lm35 to degree C 
-	c=read(portd,0);	//taking input from PIR sensor
+	b=b*0.488;		//converting value from lm35 to degree C 
+	c=read(portd,0);	//taking input from PIR sensor, where PIR sensor is connected to PORTD Pin 0 
 	
-	
-	
-	
-	
+		
 	for(int i=1;i<=2;i++)
 	{
 		if(i==1)
 		{
 			a=adc_read(0);
-            while(a>2000)
+            
+			while(a>2000)
 			{
-	
 				pwm(180);
 		
 				write(portb,7,h);
@@ -60,11 +57,9 @@ int main()
 				
 				lcd_gotoxy(0,1);
 				lcd_num(a);
-                a=adc_read(0);
-
+               			a=adc_read(0);
 			}
 
-	
 	
 			if(a<2000)	//if the soil doesn't require water, it will stay in this loop
 			{
@@ -78,10 +73,9 @@ int main()
 
 				lcd_gotoxy(0,0);	//lcd_gotoxy(column,row)
 				lcd_string("Mois");
-                lcd_gotoxy(0,1);
-                lcd_num(a);
-                a=adc_read(0);
-			
+                		lcd_gotoxy(0,1);
+                		lcd_num(a);
+                		a=adc_read(0);
 			}
 			
 		
@@ -91,7 +85,7 @@ int main()
 		{
 			c=read(portd,0);
             
-            while(c==1)	//bird detection
+            		while(c==1)	//bird detection
 			{
 				write(portb,7,h);
 				write(portd,4,h);
@@ -99,10 +93,10 @@ int main()
 				
 				
 				lcd_gotoxy(12,0);
-                lcd_string("PIR");
-                lcd_gotoxy(12,1);
+                		lcd_string("PIR");
+                		lcd_gotoxy(12,1);
 				lcd_num(c);
-                c=read(portd,0);
+              			c=read(portd,0);
 			}
 			
 			if(c==0)
@@ -113,7 +107,7 @@ int main()
 				write(portb,7,l);
 				
 				lcd_gotoxy(12,0);
-                lcd_string("PIR");
+              			lcd_string("PIR");
 				lcd_gotoxy(12,1);
 				lcd_num(c);
 				
@@ -127,17 +121,8 @@ int main()
 			//lcd_gotoxy(7,1);
 			//lcd_string(" C");
 			
-			
-			
-			
-			
-		
-		}
-	
+			}
 	}
-	
-	
-
 	}
 
 }
